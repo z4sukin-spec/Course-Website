@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .register-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            max-width: 800px;
+            width: 100%;
+        }
+        .register-header {
+            background: linear-gradient(135deg, #3cb175 0%, #20359e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .register-body {
+            padding: 40px;
+        }
+        .form-control {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #3cb175;
+            box-shadow: 0 0 0 0.2rem rgba(60, 177, 117, 0.25);
+        }
+        .btn-register {
+            background: linear-gradient(135deg, #3cb175 0%, #20359e 100%);
+            border: none;
+            border-radius: 10px;
+            padding: 15px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(60, 177, 117, 0.3);
+        }
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+        .gender-options {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        .gender-option {
+            text-align: center;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+        .gender-option:hover {
+            border-color: #3cb175;
+            background-color: #f8f9fa;
+        }
+        .gender-option.selected {
+            border-color: #3cb175;
+            background-color: rgba(60, 177, 117, 0.1);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #3cb175;
+        }
+        .password-strength {
+            height: 5px;
+            background: #e9ecef;
+            border-radius: 3px;
+            margin-top: 5px;
+        }
+        .password-strength-bar {
+            height: 100%;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-header">
+            <div class="row align-items-center">
+                <div class="col-md-2">
+                    <i class="bi bi-person-plus-fill feature-icon"></i>
+                </div>
+                <div class="col-md-8">
+                    <h2 class="mb-2">Create Your Account</h2>
+                    <p class="mb-0">Join our community and start your learning journey</p>
+                </div>
+                <div class="col-md-2">
+                    <i class="bi bi-book-half feature-icon"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="register-body">
+            <form name="regForm" onsubmit="return validateForm()">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">First Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                            <input type="text" class="form-control" name="firstName" placeholder="Enter your first name" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Last Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                            <input type="text" class="form-control" name="lastName" placeholder="Enter your last name" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email Address</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                        <input type="email" class="form-control" name="email" placeholder="Enter your email address" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Date of Birth</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                            <input type="date" class="form-control" name="dob" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Course Selection</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-book"></i></span>
+                            <select class="form-select" name="course" required>
+                                <option value="">Choose a course...</option>
+                                <option value="c_cpp">C/C++ Programming</option>
+                                <option value="python">Python Development</option>
+                                <option value="web">Web Technology</option>
+                                <option value="ai">Open AI & Machine Learning</option>
+                                <option value="excel">Excel & Data Analysis</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-at"></i></span>
+                        <input type="text" class="form-control" name="username" placeholder="Choose a username" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                        <input type="password" class="form-control" name="password" placeholder="Create a strong password" required oninput="checkPasswordStrength()">
+                    </div>
+                    <div class="password-strength mt-2">
+                        <div class="password-strength-bar" id="passwordStrength"></div>
+                    </div>
+                    <div class="form-text">Password must be at least 6 characters long</div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Gender</label>
+                    <div class="gender-options">
+                        <div class="gender-option" onclick="selectGender('male')">
+                            <i class="bi bi-gender-male" style="font-size: 1.5rem;"></i>
+                            <div>Male</div>
+                            <input type="radio" name="gender" value="male" style="display: none;">
+                        </div>
+                        <div class="gender-option" onclick="selectGender('female')">
+                            <i class="bi bi-gender-female" style="font-size: 1.5rem;"></i>
+                            <div>Female</div>
+                            <input type="radio" name="gender" value="female" style="display: none;">
+                        </div>
+                        <div class="gender-option" onclick="selectGender('other')">
+                            <i class="bi bi-gender-ambiguous" style="font-size: 1.5rem;"></i>
+                            <div>Other</div>
+                            <input type="radio" name="gender" value="other" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="terms" required>
+                    <label class="form-check-label" for="terms">
+                        I agree to the <a href="#" class="text-decoration-none">Terms of Service</a> and <a href="#" class="text-decoration-none">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-register btn-lg">
+                    <i class="bi bi-person-plus me-2"></i>Create Account
+                </button>
+
+                <div class="text-center mt-3">
+                    <p class="mb-0">Already have an account? <a href="#" class="text-decoration-none">Sign In</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function validateForm() {
+            let firstName = document.forms["regForm"]["firstName"].value;
+            let lastName = document.forms["regForm"]["lastName"].value;
+            let email = document.forms["regForm"]["email"].value;
+            let dob = document.forms["regForm"]["dob"].value;
+            let username = document.forms["regForm"]["username"].value;
+            let password = document.forms["regForm"]["password"].value;
+            let gender = document.querySelector('input[name="gender"]:checked');
+            let course = document.forms["regForm"]["course"].value;
+
+            if (firstName == "" || lastName == "" || email == "" || dob == "" || username == "" || password == "" || !gender || course == "") {
+                alert("All fields must be filled out!");
+                return false;
+            }
+
+            let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (!email.match(emailPattern)) {
+                alert("Please enter a valid email address!");
+                return false;
+            }
+
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long!");
+                return false;
+            }
+
+            alert("Registration successful! Welcome to our community.");
+            return true;
+        }
+
+        function selectGender(gender) {
+            // Remove selected class from all options
+            document.querySelectorAll('.gender-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+
+            // Add selected class to clicked option
+            const selectedOption = document.querySelector(`.gender-option:nth-child(${gender === 'male' ? 1 : gender === 'female' ? 2 : 3})`);
+            selectedOption.classList.add('selected');
+
+            // Set the radio button value
+            document.querySelector(`input[name="gender"][value="${gender}"]`).checked = true;
+        }
+
+        function checkPasswordStrength() {
+            const password = document.forms["regForm"]["password"].value;
+            const strengthBar = document.getElementById('passwordStrength');
+            let strength = 0;
+
+            if (password.length >= 6) strength += 25;
+            if (password.length >= 8) strength += 25;
+            if (/[A-Z]/.test(password)) strength += 25;
+            if (/[0-9]/.test(password)) strength += 25;
+
+            strengthBar.style.width = strength + '%';
+            
+            if (strength < 50) {
+                strengthBar.style.backgroundColor = '#dc3545';
+            } else if (strength < 75) {
+                strengthBar.style.backgroundColor = '#ffc107';
+            } else {
+                strengthBar.style.backgroundColor = '#198754';
+            }
+        }
+
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('.form-control');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focus');
+                });
+                input.addEventListener('blur', function() {
+                    this.parentElement.classList.remove('focus');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

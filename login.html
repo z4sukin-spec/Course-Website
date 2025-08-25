@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to NLH</title>
+    <link rel="icon" href="img-1.jpeg.png">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #3cb175 0%, #20359e 50%, #18c7de 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            max-width: 450px;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+        .login-card:hover {
+            transform: translateY(-5px);
+        }
+        .login-header {
+            background: linear-gradient(135deg, #3cb175 0%, #20359e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .login-body {
+            padding: 40px;
+        }
+        .form-control {
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+            padding: 15px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #3cb175;
+            box-shadow: 0 0 0 0.3rem rgba(60, 177, 117, 0.25);
+        }
+        .input-group-text {
+            background: transparent;
+            border: 2px solid #e9ecef;
+            border-right: none;
+            border-radius: 12px 0 0 12px;
+        }
+        .btn-login {
+            background: linear-gradient(135deg, #3cb175 0%, #20359e 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(60, 177, 117, 0.3);
+        }
+        .password-toggle {
+            background: none;
+            border: none;
+            color: #6c757d;
+            cursor: pointer;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+        .social-login {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        .social-btn:hover {
+            transform: translateY(-3px);
+        }
+        .forgot-link {
+            color: #3cb175;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .forgot-link:hover {
+            color: #20359e;
+        }
+        .register-link {
+            color: #20359e;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        .register-link:hover {
+            color: #3cb175;
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+        @media (max-width: 576px) {
+            .login-body {
+                padding: 30px 20px;
+            }
+            .login-header {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div class="login-header">
+            <i class="bi bi-shield-lock feature-icon"></i>
+            <h2 class="mb-2">Welcome Back</h2>
+            <p class="mb-0">Sign in to your NLH account</p>
+        </div>
+
+        <div class="login-body">
+            <form id="loginForm" onsubmit="return validateLogin()">
+                <div class="mb-4">
+                    <label class="form-label">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                        <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword()">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mb-4 d-flex justify-content-between align-items-center">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+                    <a href="forgetpassword.html" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-login mb-4">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+                </button>
+
+                <div class="social-login">
+                    <p class="text-muted mb-3">Or sign in with</p>
+                    <div class="d-flex justify-content-center">
+                        <a href="#" class="social-btn bg-primary text-white">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" class="social-btn bg-info text-white">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                        <a href="#" class="social-btn bg-danger text-white">
+                            <i class="bi bi-google"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <p class="mb-0">Don't have an account? 
+                        <a href="register.html" class="register-link">Register here</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function validateLogin() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            
+            if (username === "" || password === "") {
+                showAlert("Please fill out both fields!", "danger");
+                return false;
+            }
+            
+            if (password.length < 6) {
+                showAlert("Password must be at least 6 characters long!", "warning");
+                return false;
+            }
+            
+            // Simulate successful login
+            showAlert("Login successful! Redirecting...", "success");
+            
+            // Prevent form submission for demo purposes
+            return false;
+        }
+
+        function togglePassword() {
+            let passField = document.getElementById("password");
+            let toggleBtn = document.querySelector('.password-toggle i');
+            
+            if (passField.type === "password") {
+                passField.type = "text";
+                toggleBtn.classList.remove('bi-eye');
+                toggleBtn.classList.add('bi-eye-slash');
+            } else {
+                passField.type = "password";
+                toggleBtn.classList.remove('bi-eye-slash');
+                toggleBtn.classList.add('bi-eye');
+            }
+        }
+
+        function showAlert(message, type) {
+            // Create alert element
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            // Insert alert before the form
+            const form = document.getElementById('loginForm');
+            form.parentNode.insertBefore(alertDiv, form);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Add some animation to inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('.form-control');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focus');
+                });
+                input.addEventListener('blur', function() {
+                    this.parentElement.classList.remove('focus');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
